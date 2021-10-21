@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   /**
    * This is the main entry point for your application, it's the first file
@@ -8,4 +10,11 @@ module.exports = {
   module: {
     rules: require('./webpack.rules'),
   },
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     'meta': {
+  //       'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': "script-src 'self' 'unsafe-inline'; object-src 'self'" },
+  //     }
+  //   }),
+  // ]
 };

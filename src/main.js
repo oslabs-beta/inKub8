@@ -1,24 +1,38 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, session } = require('electron');
 const path = require('path');
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
-  app.quit();
-}
+const isDev = require('electron-is-dev');
 
 const createWindow = () => {
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    
+    if(details.responseHeaders['X-Frame-Options']){
+      delete details.responseHeaders['X-Frame-Options'];
+    };
+
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ["default-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src *; img-src data: http: https:;"]
+      }
+    })
+    console.log('here')
+  })
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 600
   });
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
 };
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -41,6 +55,12 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+// app.on('certificate-error', function(event, webContents, url, error, 
+//   certificate, callback) {
+//       event.preventDefault();
+//       callback(true);
+// });
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
