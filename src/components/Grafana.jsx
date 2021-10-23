@@ -5,7 +5,6 @@ class Grafana extends Component {
     return (
       <div>
         <main>
-          <h1>Grafana</h1>
 
           <iframe
             width="100%"

@@ -6,8 +6,6 @@ class Prom extends Component {
     return (
       <div>
         <main>
-          <h1>Prometheus</h1>
-
           <iframe
           
             width="100%"
