@@ -9,9 +9,9 @@ class Grafana extends Component {
 
           <iframe
             width="100%"
-            height="100%"
+            height="1000 px"
             name={"disable-x-frame-options"}
-            src={"http://127.0.0.1:3000"}
+            src={"http://127.0.0.1:3000/?orgId=1"}
           ></iframe>
           
         </main>
@@ -20,26 +20,7 @@ class Grafana extends Component {
   }
 }
 
-// class Grafana extends Component {
-//   render() {
-//     return <iframe src="https://www.youtube.com/embed/cWDJoK8zw58" />;
-//   }
-// }
 
 export default Grafana;
 
-// class ClusterDashboard extends React.Component {
-//   render() {
-//       //suppose user is received from props
-//       const { user } = this.props
-//       return (
-
-//             <iframe
-//             width="97%"
-//             height="1150px"
-//             src={"http://localhost:3000/goto/tJaUhdH7z?orgId=1"}
-//             />
-//       )
-//   }
-// }
 // export default ClusterDashboard;
