@@ -6,6 +6,12 @@ kc.loadFromDefault();
 const coreAPI = kc.makeApiClient(k8s.CoreV1Api);
 const apisAPI = kc.makeApiClient(k8s.ApisApi);
 const customObjectsAPI = kc.makeApiClient(k8s.CustomObjectsApi);
+const appsV1API = kc.makeApiClient(k8s.AppsV1Api);
+const scale = require('./newDeploy.js')
+
+
+scale('default', 'prometheus-grafana');
+
 
 function getAllOtherObjects(namespace){
 	return new Promise((resolve, reject) => {
@@ -124,6 +130,8 @@ async function getAllObjects(){
 	const coreObjects = await getAllCoreObjects("default");
 	const otherObjects = await getAllOtherObjects("default");
 	const allObjects = Object.assign(coreObjects, otherObjects);
-	console.log(allObjects);
+	// console.log(allObjects);
 	fs.writeFileSync("./cluster.json", JSON.stringify(allObjects));
 }
+
+getAllObjects()
