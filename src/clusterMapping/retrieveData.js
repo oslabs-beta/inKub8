@@ -23,7 +23,7 @@ function getData(data, objectType, requestedData){
   // iterate over each instance of the given objectType
   for(let i = 0; i < data[objectType].length; i++){
     let currentObj = data[objectType][i];
-    let nodeObjects = getObjData(currentObj, requestedData, objectType);
+    let nodeObjects = getObjData(data, currentObj, requestedData, objectType);
     //Add our data into returnedData array in a format accepted by cytograph
     nodeObjects.forEach(object => {
       try{
@@ -35,7 +35,7 @@ function getData(data, objectType, requestedData){
   return returnedData;
 }
 
-function getObjData(obj, requestedData, type) {
+function getObjData(data, obj, requestedData, type) {
   let nodeObjects = [];
   // retrieve data at requested endpoints, add returned data into objectData in format {requestedData value (ex: metadata.name): data}
   const objectData = {};
@@ -60,8 +60,8 @@ function getObjData(obj, requestedData, type) {
         "data": {id: `${obj.metadata.uid}--${owner.uid}`, target: obj.metadata.uid, source: owner.uid},
         "group": "edges"
       });
-      let {output, type} = traverse(cluster, owner.uid);
-      nodeObjects = nodeObjects.concat(getObjData(output, null, type));
+      let {output, type} = traverse(data, owner.uid);
+      nodeObjects = nodeObjects.concat(getObjData(data, output, null, type));
     });
   }
 

@@ -1,6 +1,34 @@
 import React, { Component, setState } from 'react';
 //import { ipcRenderer } from 'electron';
 const cytoscape = require('cytoscape');
+const cyStyle = [{
+    "selector": "node",
+    "style": {
+      "background-color": "#0066cc",
+      "content": "data(name)",
+      "color": "#004080",
+      "shape": "data(type)",
+      "height": 40,
+      "width": 40,
+      "text-wrap": "wrap",
+      "text-max-width": 100,
+      "text-overflow-wrap": "anywhere",
+      "font-size": 10,
+      "text-valign": "center"
+      
+    }
+  }, {
+    "selector": "edge",
+      "style": {
+        "width": 3,
+        "line-color": "#b3d9ff",
+        "target-arrow-color": "#b3d9ff",
+        "target-arrow-shape": "triangle",
+        "curve-style": "bezier"
+      }
+  }];
+
+
 
 class Home extends Component {
   constructor(props){
@@ -8,21 +36,19 @@ class Home extends Component {
     this.state = {}
   }
 
-  componentDidMount(){
-    
-    let clusterData;
+  async componentDidMount(){
+    const toJson = function(res){ return res.json(); }; 
     window.shit.send('compileData');
-    window.shit.receive('compileData', (event, cluster) => {
-      console.log(cluster);
-
-    })
-    /*let cy = cytoscape({
+    let clusterData = await window.shit.invoke('compileData').then(cluster => {
+        return cluster;
+    });
+    let cy = cytoscape({
 
       container: document.getElementById('cy'), // container to render in
     
       elements: clusterData,
      
-      style: fetch('cy-style.json').then(toJson),
+      style: cyStyle,
     
       layout: {
         name: 'breadthfirst',
@@ -49,8 +75,8 @@ class Home extends Component {
       userPanningEnabled: false
     });
 
-    this.setState({clusterData: clusterData, cy: cy})
-    return null;*/
+    this.setState({clusterData: clusterData, cy: cy});
+    return null;
   }
 
   render() {
@@ -58,7 +84,7 @@ class Home extends Component {
       <div>
         <main>
           <h1>Test</h1>
-          <div id='cy'></div>
+          <div id='cy' style={{height: '600px'}}></div>
         </main>
       </div>
     );

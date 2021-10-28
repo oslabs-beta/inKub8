@@ -70,9 +70,9 @@ app.on('activate', () => {
   }
 });
 
-ipcMain.on('compileData', async (event, arg) => {
+ipcMain.handle('compileData', async (event, arg) => {
   let cluster = await compileData();
-  event.reply('compileData', cluster);
+  return cluster;
   //return compileData();
 });
 

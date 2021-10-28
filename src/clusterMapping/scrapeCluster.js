@@ -132,4 +132,4 @@ async function getAllObjects(){
 	return allObjects;
 }
 
-export {getAllObjects}
+export {getAllObjects};
