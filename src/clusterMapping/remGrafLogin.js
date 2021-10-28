@@ -9,7 +9,7 @@ const k8sApi = kc.makeApiClient(k8s.CoreV1Api)
 const appsV1API = kc.makeApiClient(k8s.AppsV1Api);
 
 
- const scale = async function(namespace, name) {
+ const removeGrafLogin = async function(namespace, name) {
 
   const res = await appsV1API.readNamespacedDeployment('prometheus-grafana', 'default')
   .then(res => {
@@ -55,7 +55,7 @@ const appsV1API = kc.makeApiClient(k8s.AppsV1Api);
 
 };
 
-module.exports = scale
+export default removeGrafLogin;
 
 
 
