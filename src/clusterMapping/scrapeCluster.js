@@ -1,16 +1,15 @@
 const k8s = require("@kubernetes/client-node");
 const kc = new k8s.KubeConfig();
-const fs = require("fs");
 kc.loadFromDefault();
 
 const coreAPI = kc.makeApiClient(k8s.CoreV1Api);
 const apisAPI = kc.makeApiClient(k8s.ApisApi);
 const customObjectsAPI = kc.makeApiClient(k8s.CustomObjectsApi);
 const appsV1API = kc.makeApiClient(k8s.AppsV1Api);
-const scale = require('./newDeploy.js')
+//const removeGrafLogin = require('./remGrafLogin.js')
 
 
-scale('default', 'prometheus-grafana');
+//removeGrafLogin('default', 'prometheus-grafana');
 
 
 function getAllOtherObjects(namespace){
@@ -130,8 +129,7 @@ async function getAllObjects(){
 	const coreObjects = await getAllCoreObjects("default");
 	const otherObjects = await getAllOtherObjects("default");
 	const allObjects = Object.assign(coreObjects, otherObjects);
-	// console.log(allObjects);
-	fs.writeFileSync("./cluster.json", JSON.stringify(allObjects));
+	return allObjects;
 }
 
-getAllObjects()
+export {getAllObjects};
