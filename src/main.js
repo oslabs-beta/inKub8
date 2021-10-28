@@ -1,5 +1,6 @@
-const { app, BrowserWindow, session } = require('electron');
+const { app, BrowserWindow, session, ipcMain } = require('electron');
 const path = require('path');
+const {compileData} = require('./clusterMapping/retrieveData.js')
 
 const isDev = require('electron-is-dev');
 
@@ -16,7 +17,6 @@ const createWindow = () => {
         'Content-Security-Policy': ["default-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src *; img-src data: http: https:;"]
       }
     })
-    console.log('here')
   })
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -24,6 +24,12 @@ const createWindow = () => {
     minHeight: 1000, 
     maxWidth: 2000,
     minHeight: 2000,
+    webPreferences: {
+      //enableRemoteModule: true,
+      //nodeIntegration: true
+      contextIsolation: true,
+      preload: path.resolve(__dirname, "..", "..", "src", "preload.js")
+    },
     // center: true,
     show: false
   });
@@ -62,6 +68,12 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+ipcMain.on('compileData', async (event, arg) => {
+  let cluster = await compileData();
+  event.reply('compileData', cluster);
+  //return compileData();
 });
 
 // app.on('certificate-error', function(event, webContents, url, error, 

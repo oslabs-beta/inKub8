@@ -11,6 +11,19 @@ module.exports = {
   module: {
     rules,
   },
+  /*
+  externals: {
+    'fs': require('fs')
+  },
+  resolve: {
+    fallback: {
+      'path': require.resolve('path-browserify'),
+      'fs': require.resolve('fs')
+    }
+  },
+  node: {
+    __dirname: false
+  }*/
   // plugins: [
   //   new HtmlWebpackPlugin({
   //     'meta': {
