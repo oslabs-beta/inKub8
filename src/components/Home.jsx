@@ -83,7 +83,6 @@ class Home extends Component {
     return (
       <div>
         <main>
-          <h1>Test</h1>
           <div id='cy' style={{height: '600px'}}></div>
         </main>
       </div>
