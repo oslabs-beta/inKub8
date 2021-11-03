@@ -132,4 +132,5 @@ async function getAllObjects(){
 	return allObjects;
 }
 
-export {getAllObjects};
+
+module.exports = {getAllObjects};
