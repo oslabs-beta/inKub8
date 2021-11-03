@@ -55,7 +55,7 @@ const appsV1API = kc.makeApiClient(k8s.AppsV1Api);
 
 };
 
-export default removeGrafLogin;
+module.exports = removeGrafLogin;
 
 
 

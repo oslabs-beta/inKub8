@@ -49,6 +49,7 @@ function getObjData(data, obj, requestedData, type) {
     });
   }
   
+
   nodeObjects.push({
     "data": {id: obj.metadata.uid, "name": obj.metadata.name, "creationTimestamp": obj.metadata.creationTimestamp, "moreInfo": objectData, "type": setType(type)},
     "group": "nodes",
@@ -137,4 +138,4 @@ async function compileData(options){
 	return dataArr;
 }
 
-export {compileData};
+module.exports = {compileData};
