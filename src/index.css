@@ -10,6 +10,30 @@ head {
   height: 0
 }
 
+#terminal {
+  margin: 20px auto;
+
+}
+
+/* .xterm-cursor-layer {
+  border: 5px 0px 0px 5px solid black;
+}
+
+.xterm-viewport {
+  border: 0px 5px 0px 0px solid black;
+}*/
+
+.xterm-helpers {
+  border: 5px solid black;
+}
+
+/* .xterm-viewport {
+  height: 418px;
+  padding: 20px;
+  box-shadow: 10px 5px 5px grey;
+  border: 5px solid black;
+  border-radius: 5px;
+} */
 .column {
   float: left;
   padding: 10px;

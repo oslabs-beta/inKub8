@@ -3,6 +3,12 @@ const path = require('path');
 const {compileData} = require('./clusterMapping/retrieveData.js')
 console.log(compileData, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 const isDev = require('electron-is-dev');
+const os = require('os');
+const pty = require('node-pty');
+console.log(pty)
+
+// if someone is on windows utilize powershell and if not do bash
+const shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
 
 const createWindow = () => {
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
@@ -18,6 +24,8 @@ const createWindow = () => {
       }
     })
   })
+
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -26,7 +34,8 @@ const createWindow = () => {
     minHeight: 2000,
     webPreferences: {
       //enableRemoteModule: true,
-      //nodeIntegration: true
+      nodeIntegration: true,
+      
       contextIsolation: true,
       preload: path.resolve(__dirname, "..", "..", "src", "preload.js")
     },
@@ -43,6 +52,22 @@ const createWindow = () => {
   mainWindow.show();
   mainWindow.webContents.openDevTools();
  
+  const ptyProcess = pty.spawn(shell, [], {
+    name: 'xterm-color', 
+    cols: 80, 
+    rows: 24, 
+    cwd: process.env.HOME, 
+    env: process.env},
+    );
+  
+  ptyProcess.on('data', function(data){
+    mainWindow.webContents.send('terminal.incData', data);
+  });  
+
+  ipcMain.on('terminal.toTerm', function(event, data) {
+    ptyProcess.write(data)
+    // mainWindow.webContents.send('terminal.incData', data);
+  })
   
 };
 

@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-//import { ipcRenderer } from 'electron';
-const cytoscape = require("cytoscape");
-const cyStyle = [
-  {
-    selector: "node",
-    style: {
-      "background-color": "#CCCCDC",
-      content: "data(name)",
-      color: "#CCCCDC",
-      shape: "data(type)",
-      height: 70,
-      width: 70,
+import React, { Component, setState } from 'react';
+import fs from 'fs';
+import buildTerminal from "../index.js"
+import '../../node_modules/xterm/css/xterm.css';
+
+const cytoscape = require('cytoscape');
+const cyStyle = [{
+    "selector": "node",
+    "style": {
+      "background-color": "#0066cc",
+      "content": "data(name)",
+      "color": "#004080",
+      "shape": "data(type)",
+      "height": 40,
+      "width": 40,
       "text-wrap": "wrap",
       "text-max-width": 200,
       "text-overflow-wrap": "anywhere",
@@ -75,14 +77,11 @@ class Home extends Component {
     });
   }
 
-  async componentDidMount() {
-    const toJson = function (res) {
-      return res.json();
-    };
-    window.shit.send("compileData");
-    let clusterData = await window.shit
-      .invoke("compileData")
-      .then((cluster) => {
+  async componentDidMount(){
+    buildTerminal();
+    const toJson = function(res){ return res.json(); }; 
+    window.bridge.send('compileData');
+    let clusterData = await window.bridge.invoke('compileData').then(cluster => {
         return cluster;
       });
     this.setState({ clusterData: clusterData });
