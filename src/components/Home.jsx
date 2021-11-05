@@ -37,7 +37,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.renderCyto = this.renderCyto.bind(this);
+  
   }
 
   renderCyto() {
@@ -105,7 +105,7 @@ class Home extends Component {
     return (
       <div>
         <main>
-          <div id="cy" style={{ height: "800px" }}></div>
+          <div id="cy" style={{ height: "400px" }}></div>
           <div id="terminal"></div>
         </main>
       </div>
