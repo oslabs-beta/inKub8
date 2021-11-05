@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleTap = this.handleTap.bind(this);
+    // this.handleTap = this.handleTap.bind(this);
   }
 
   handleTap(data) {
@@ -40,15 +40,15 @@ class App extends Component {
     }
     return <DisplayMetrics />;
 
-    switch (lastPodShape) {
-      case "ellipse":
+    // switch (lastPodShape) {
+    //   case "ellipse":
     
-        return <PodMetrics />;
-      case "triangle":
- 
-      default:
-        return <DisplayMetrics />;
-    }
+    //     return <PodMetrics />;
+    //   case "triangle":
+    //     return <ServiceMetrics /> 
+    //   default:
+    //     return <DisplayMetrics />;
+    // }
   }
 
   render() {
