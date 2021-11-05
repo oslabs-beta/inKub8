@@ -2,29 +2,33 @@ const {getAllObjects} = require("./scrapeCluster.js");
 console.log(getAllObjects, "AAAAAAAAAAAAAAAAAAAAA");
 //Timestamp, Name, uid, #  of containers, status: phase, hostIP, podIP, owerReference Kind, ownerReference uid
 
+//Used to traverse our cluster and find certain objects
 function traverse(searchType, data, uid, returnVal, location = "cluster"){
+    //Wrap our tests in a try catch because the fields we check often don't exist
 	try{
+        //Define different searchType's. We do this because depending on what we are looking for we need to check different fields
 		if(searchType == "ownerObject"){
+            //If the objects metadata.uid field matches the uid we are searching for, return the object
+            //Good for finding any object provided it's UID. Often used to find an object's owners hence the name.
 			if(data.metadata.uid === uid){
 				const objectType = location.split(".")[1];
 				returnVal = {type: objectType, output: data};
 			}
 		}else if(searchType == "childObjects"){
-			returnVal = [];
+            if(!Array.isArray(returnVal)){
+                returnVal = [];
+            }
+            //If any of the object's ownerReferences.uid field match the uid we are searching for, add the object to our returnVal's
+            //We return an array here because an object can have multiple children
 			data.metadata.ownerReferences.forEach(owner => {
 				if(owner.uid == uid){
 					const objectType = location.split(".")[1];
 					returnVal.push({type: objectType, output: data});
 				}
 			});
-		}else if(searchType == "endpointslices"){
-			data.endpoints.forEach(endpoint => {
-				if(endpoint.targetRef.uid == uid){
-					returnVal = {type: "endpointslices", output: data};
-				}
-			});
 		}
 	}catch(err){}
+    //Recursively moves through the entire object.
 	if(Array.isArray(data) || typeof data == "object"){
 		for(const kindex in data){
 			const temp = traverse(searchType, data[kindex], uid, returnVal, location + `.${kindex}`);
