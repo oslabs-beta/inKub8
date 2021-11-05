@@ -1,6 +1,8 @@
 import React, { Component, setState } from 'react';
 import fs from 'fs';
-//import { ipcRenderer } from 'electron';
+import buildTerminal from "../index.js"
+import '../../node_modules/xterm/css/xterm.css';
+
 const cytoscape = require('cytoscape');
 const cyStyle = [{
     "selector": "node",
@@ -74,9 +76,10 @@ class Home extends Component {
   }
 
   async componentDidMount(){
+    buildTerminal();
     const toJson = function(res){ return res.json(); }; 
-    window.shit.send('compileData');
-    let clusterData = await window.shit.invoke('compileData').then(cluster => {
+    window.bridge.send('compileData');
+    let clusterData = await window.bridge.invoke('compileData').then(cluster => {
         return cluster;
     });
     this.setState({clusterData: clusterData});
@@ -88,9 +91,9 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <main>
-          <div id='cy' style={{height: '600px'}}></div>
-        </main>
+        <div id='cy' style={{height: '600px'}}></div>
+        {/* {((e) => {console.log('render')})()} */}
+        <div id="terminal" ></div>
       </div>
     );
   }
