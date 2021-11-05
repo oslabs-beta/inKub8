@@ -2,17 +2,18 @@ import React, { Component, setState } from 'react';
 import fs from 'fs';
 import buildTerminal from "../index.js"
 import '../../node_modules/xterm/css/xterm.css';
-
-const cytoscape = require('cytoscape');
-const cyStyle = [{
-    "selector": "node",
-    "style": {
-      "background-color": "#0066cc",
-      "content": "data(name)",
-      "color": "#004080",
-      "shape": "data(type)",
-      "height": 40,
-      "width": 40,
+//import { ipcRenderer } from 'electron';
+const cytoscape = require("cytoscape");
+const cyStyle = [
+  {
+    selector: "node",
+    style: {
+      "background-color": "#CCCCDC",
+      content: "data(name)",
+      color: "#CCCCDC",
+      shape: "data(type)",
+      height: 70,
+      width: 70,
       "text-wrap": "wrap",
       "text-max-width": 200,
       "text-overflow-wrap": "anywhere",
@@ -75,6 +76,22 @@ class Home extends Component {
       },
       userPanningEnabled: false,
     });
+
+    const props = this.props;
+
+    cy.on("tap", "node", function (shape) {
+      const onTap = props.onTap;
+      const node = shape.target;
+      onTap?.(node._private.data);
+      // onTap && onTap(node._private.data);
+      // if (onTap != null) {
+      //   onTap(node._private.data);
+      // }
+      // if (onTap !== null && onTap !== undefined) {
+      //   onTap(node._private.data);
+      // }
+      console.log("POD TAPPED!!", node._private.data);
+    });
   }
 
   async componentDidMount(){
@@ -95,17 +112,16 @@ class Home extends Component {
     return (
       <div>
         <main>
-          <div id="cy" style={{ height: "500px" }}></div>
-          <iframe
-            src="http://localhost:3000/d-solo/Ls9K11Knz/kubernetes-compute-resources-cluster-copy?orgId=1&from=1635812558958&to=1635816158958&panelId=8"
-            width="100%"
-            height="200"
-            frameborder="0"
-          ></iframe>
+          <div id="cy" style={{ height: "800px" }}></div>
+          <div id="terminal"></div>
         </main>
       </div>
     );
   }
 }
 
+
+
+
 export default Home;
+
