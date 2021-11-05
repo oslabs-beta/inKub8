@@ -133,4 +133,4 @@ async function getAllObjects(){
 }
 
 
-module.exports = {getAllObjects};
+export {getAllObjects};

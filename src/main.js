@@ -1,7 +1,7 @@
 const { app, BrowserWindow, session, ipcMain } = require('electron');
 const path = require('path');
 const {compileData} = require('./clusterMapping/retrieveData.js')
-
+console.log(compileData, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 const isDev = require('electron-is-dev');
 
 const createWindow = () => {
