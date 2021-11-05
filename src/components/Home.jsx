@@ -1,5 +1,4 @@
 import React, { Component, setState } from 'react';
-import fs from 'fs';
 import buildTerminal from "../index.js"
 import '../../node_modules/xterm/css/xterm.css';
 //import { ipcRenderer } from 'electron';
@@ -41,6 +40,7 @@ class Home extends Component {
   }
 
   renderCyto() {
+    //Configure our cytoscape graph
     let cy = cytoscape({
       container: document.getElementById("cy"), // container to render in
 
@@ -79,6 +79,7 @@ class Home extends Component {
 
     const props = this.props;
 
+    //Configure behavior for when we click an object
     cy.on("tap", "node", function (shape) {
       const onTap = props.onTap;
       const node = shape.target;
@@ -87,15 +88,17 @@ class Home extends Component {
     });
   }
 
+  //Load our cluster data and initialize our terminal once the DOM loads
   async componentDidMount(){
     buildTerminal();
-    const toJson = function(res){ return res.json(); }; 
+    //const toJson = function(res){ return res.json(); }; 
     window.bridge.send('compileData');
     let clusterData = await window.bridge.invoke('compileData').then(cluster => {
         return cluster;
       });
     this.setState({ clusterData: clusterData });
     console.log(clusterData);
+    //re-render the cluster when window resizes
     window.addEventListener("resize", this.renderCyto);
     this.renderCyto();
     return null;
