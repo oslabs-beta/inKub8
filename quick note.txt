@@ -1,0 +1,5 @@
+"node-pty": "^0.10.1",
+
+if this isn't in the dependencies it's because gunnar removed it and forgot to add it back before pushing / merging
+
+Gunnar had to remove it because not enough space to install node-pty's dependencies
