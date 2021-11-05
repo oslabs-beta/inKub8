@@ -1,5 +1,7 @@
-
-import React, { Component } from "react";
+import React, { Component, setState } from 'react';
+import fs from 'fs';
+import buildTerminal from "../index.js"
+import '../../node_modules/xterm/css/xterm.css';
 //import { ipcRenderer } from 'electron';
 const cytoscape = require("cytoscape");
 const cyStyle = [
@@ -32,7 +34,6 @@ const cyStyle = [
 ];
 
 class Home extends Component {
-
   constructor(props) {
     super(props);
     this.state = {};
@@ -75,9 +76,9 @@ class Home extends Component {
       },
       userPanningEnabled: false,
     });
-    
+
     const props = this.props;
-    
+
     cy.on("tap", "node", function (shape) {
       const onTap = props.onTap;
       const node = shape.target;
@@ -86,11 +87,11 @@ class Home extends Component {
     });
   }
 
-  async componentDidMount() {
-    window.shit.send("compileData");
-    let clusterData = await window.shit
-      .invoke("compileData")
-      .then((cluster) => {
+  async componentDidMount(){
+    buildTerminal();
+    const toJson = function(res){ return res.json(); }; 
+    window.bridge.send('compileData');
+    let clusterData = await window.bridge.invoke('compileData').then(cluster => {
         return cluster;
       });
     this.setState({ clusterData: clusterData });
@@ -105,12 +106,7 @@ class Home extends Component {
       <div>
         <main>
           <div id="cy" style={{ height: "800px" }}></div>
-          {/* <iframe
-            src="http://localhost:3000/d-solo/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster?orgId=1&refresh=10s&from=1636040452821&to=1636044052821&panelId=8"
-            width="100%"
-            height="200"
-            frameBorder="0"
-          ></iframe> */}
+          <div id="terminal"></div>
         </main>
       </div>
     );

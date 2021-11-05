@@ -9,7 +9,7 @@ class Prom extends Component {
           <iframe
           
             width="100%"
-            height="1000 px"
+            height="600 px"
             src="http://127.0.0.1:9090"
           ></iframe>
           
