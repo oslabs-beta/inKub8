@@ -6,16 +6,28 @@ class DisplayMetrics extends Component {
       <div>
         <main>
           <iframe
-            src="http://localhost:3000/d-solo/Ls9K11Knz/kubernetes-compute-resources-cluster-copy?orgId=1&var-datasource=default&var-cluster=&from=1635812292332&to=1635815892332&panelId=7"
+            src="http://localhost:3000/d-solo/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster?orgId=1&refresh=10s&from=1636040196181&to=1636043796181&panelId=7"
             width="350"
             height="200"
-            frameborder="0"
+            frameBorder="0"
           ></iframe>
           <iframe
-            src="http://localhost:3000/d-solo/Ls9K11Knz/kubernetes-compute-resources-cluster-copy?orgId=1&from=1635812389634&to=1635815989634&panelId=9"
+            src="http://localhost:3000/d-solo/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster?orgId=1&refresh=10s&from=1636040392525&to=1636043992525&panelId=9"
             width="350"
             height="200"
-            frameborder="0"
+            frameBorder="0"
+          ></iframe>
+          <iframe
+            src="http://localhost:3000/d-solo/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster?orgId=1&refresh=10s&from=1636069163080&to=1636072763080&panelId=16"
+            width="350"
+            height="200"
+            frameBorder="0"
+          ></iframe>
+          <iframe
+            src="http://localhost:3000/d-solo/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster?orgId=1&refresh=10s&from=1636069175351&to=1636072775351&panelId=18"
+            width="350"
+            height="200"
+            frameBorder="0"
           ></iframe>
         </main>
       </div>
