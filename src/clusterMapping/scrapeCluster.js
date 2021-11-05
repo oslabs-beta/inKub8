@@ -11,12 +11,13 @@ const appsV1API = kc.makeApiClient(k8s.AppsV1Api);
 
 //removeGrafLogin('default', 'prometheus-grafana');
 
-
+//Find all object types that don't have their own API method.
 function getAllOtherObjects(namespace){
 	return new Promise((resolve, reject) => {
 		let desiredCount = 0;
 		let count = 0;
 		const objects = {};
+        //For each API version, find each resource that exists within
 		apisAPI.getAPIVersions().then(res => {
 			const apis = res.body.groups;
 			for(let i = 0; i < apis.length; i++){
@@ -26,8 +27,10 @@ function getAllOtherObjects(namespace){
 
 		function getResources(api){
 			if(api.preferredVersion.version == "v1"){
+                //Find each resource with version v1
 				customObjectsAPI.listClusterCustomObject(api.name, "v1", "")
 					.then(res => {
+                        //Call getObjects on that array of resources
 						getObjects(res.body.resources, api.name);
 					})
 					.catch(err => {
@@ -35,6 +38,7 @@ function getAllOtherObjects(namespace){
 			}
 		}
 
+        //Find each object for each resource type
 		function getObjects(resources, apiName){
 			for(let i = 0; i < resources.length; i++){
 				const resource = resources[i];
@@ -51,6 +55,7 @@ function getAllOtherObjects(namespace){
 			}
 		}
 
+        //Resolve the function once all objects have been retrieved
 		const interval = setInterval(() => {
 			if(count == desiredCount){
 				resolve(objects);
@@ -60,6 +65,7 @@ function getAllOtherObjects(namespace){
 	});
 }
 
+//Function to get all core objects, or objects that have their own API method.
 function getAllCoreObjects(namespace){
 	return new Promise((resolve, reject) => {
 		const objects = {};
@@ -125,11 +131,13 @@ function getAllCoreObjects(namespace){
 	});
 }
 
+//Combine core objects and other objects and return the result
 async function getAllObjects(){
 	const coreObjects = await getAllCoreObjects("default");
 	const otherObjects = await getAllOtherObjects("default");
 	const allObjects = Object.assign(coreObjects, otherObjects);
 	return allObjects;
 }
+
 
 export {getAllObjects};

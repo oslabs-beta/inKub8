@@ -7,10 +7,10 @@ const coreAPI = kc.makeApiClient(k8s.CoreV1Api);
 const apisAPI = kc.makeApiClient(k8s.ApisApi);
 const customObjectsAPI = kc.makeApiClient(k8s.CustomObjectsApi);
 const appsV1API = kc.makeApiClient(k8s.AppsV1Api);
-const scale = require('./remGrafLogin.js')
+const scale = require("./remGrafLogin.js");
 
 
-scale('default', 'prometheus-grafana');
+scale("default", "prometheus-grafana");
 
 
 function getAllOtherObjects(namespace){
@@ -130,7 +130,7 @@ async function getAllObjects(){
 	const coreObjects = await getAllCoreObjects("default");
 	const otherObjects = await getAllOtherObjects("default");
 	const allObjects = Object.assign(coreObjects, otherObjects);
-	return allObjects
+	return allObjects;
 }
 
-export default getAllObjects()
+module.exports = getAllObjects;
