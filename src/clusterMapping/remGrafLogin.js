@@ -55,7 +55,7 @@ const removeGrafLogin = async function(namespace, name) {
 
 };
 
-module.exports = removeGrafLogin;
+export {removeGrafLogin};
 
 
 

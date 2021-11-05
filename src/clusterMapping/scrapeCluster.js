@@ -6,10 +6,10 @@ const coreAPI = kc.makeApiClient(k8s.CoreV1Api);
 const apisAPI = kc.makeApiClient(k8s.ApisApi);
 const customObjectsAPI = kc.makeApiClient(k8s.CustomObjectsApi);
 const appsV1API = kc.makeApiClient(k8s.AppsV1Api);
-//const removeGrafLogin = require('./remGrafLogin.js')
+const {removeGrafLogin} = require('./remGrafLogin.js')
 
 
-//removeGrafLogin('default', 'prometheus-grafana');
+removeGrafLogin('default', 'prometheus-grafana');
 
 //Find all object types that don't have their own API method.
 function getAllOtherObjects(namespace){
