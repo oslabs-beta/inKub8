@@ -3,6 +3,7 @@ body {
   margin: auto;
   width: 100%;
   height: 100%;
+  background-color: #111217;
 }
 
 head {
@@ -33,3 +34,20 @@ head {
   border: 5px solid black;
   border-radius: 5px;
 } */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 70%;
+}
+
+.right {
+  width: 25%;
+}
+
+.header {
+  color: #CCCCDC;
+  text-align: center;
+}
