@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const pty = require('node-pty');
+const nodeExternals = require('webpack-node-externals');
+// const path = require('path');
 
 module.exports = {
   /**
@@ -18,10 +20,8 @@ module.exports = {
       //'path': require('path')
     }
   }*/
-  /*externals: {
-    'fs': require('fs'),
-    'path': require('path')
-  }*/
+  target: 'node',
+  externals: [nodeExternals()]
   // plugins: [
   //   new HtmlWebpackPlugin({
   //     'meta': {
