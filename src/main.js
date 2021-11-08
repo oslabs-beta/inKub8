@@ -1,7 +1,6 @@
 const { app, BrowserWindow, session, ipcMain } = require('electron');
 const path = require('path');
 const {compileData} = require('./clusterMapping/retrieveData.js')
-console.log(compileData, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 const isDev = require('electron-is-dev');
 const os = require('os');
 const pty = require('node-pty');
@@ -54,8 +53,8 @@ const createWindow = () => {
  
   const ptyProcess = pty.spawn(shell, [], {
     name: 'xterm-color', 
-    cols: 80, 
-    rows: 24, 
+    cols: 20, 
+    rows: 10, 
     cwd: process.env.HOME, 
     env: process.env},
     );

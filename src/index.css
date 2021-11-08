@@ -11,6 +11,37 @@ head {
   height: 0
 }
 
+.xterm {
+  margin: 0 auto;
+}
+.xterm-text-layer {
+  height: 150px;
+}
+
+.xterm-selection-layer {
+  height: 150px;
+}
+ 
+.xterm-viewport {
+  margin: 0 auto;
+} 
+
+.xterm-screen {
+  position: absolute;
+  right: 8px !important;  
+  margin: 0px auto;
+}
+
+#terminal-wrapper {
+  /* border: 5px solid white; */
+  background-color: #131619;
+  padding: 4px 0px;
+  max-width: 850px;
+  min-width: 750px;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
 #terminal {
   margin: 20px auto;
 
