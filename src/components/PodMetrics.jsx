@@ -17,6 +17,18 @@ class PodMetrics extends Component {
             height="200"
             frameBorder="0"
           ></iframe>
+          <iframe
+            src="http://localhost:3000/d-solo/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&from=1636388084899&to=1636391684899&panelId=12"
+            width="350"
+            height="200"
+            frameBorder="0"
+          ></iframe>
+          <iframe
+            src="http://localhost:3000/d-solo/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&from=1636388098516&to=1636391698516&panelId=14"
+            width="350"
+            height="200"
+            frameBorder="0"
+          ></iframe>
         </main>
       </div>
     );

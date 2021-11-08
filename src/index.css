@@ -48,7 +48,13 @@ head {
   width: 25%;
 }
 
-.header {
+/* .header {
   color: #CCCCDC;
   text-align: center;
+} */
+
+#cy {
+  background-color: #131619;
+  border-style: solid;
+  border-color: #CCCCDC;
 }

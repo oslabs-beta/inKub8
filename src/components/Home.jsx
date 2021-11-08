@@ -1,4 +1,5 @@
 import React, { Component, setState } from 'react';
+import fs from 'fs';
 import buildTerminal from "../index.js"
 import '../../node_modules/xterm/css/xterm.css';
 //import { ipcRenderer } from 'electron';
@@ -14,9 +15,9 @@ const cyStyle = [
       height: 70,
       width: 70,
       "text-wrap": "wrap",
-      "text-max-width": 200,
+      "text-max-width": 380,
       "text-overflow-wrap": "anywhere",
-      "font-size": 18,
+      "font-size": 70,
       "text-valign": "bottom",
     },
   },
@@ -30,17 +31,33 @@ const cyStyle = [
       "curve-style": "bezier",
     },
   },
+  {
+    selector: 'node[type = "ellipse"]',
+    style: {
+      "background-color": "red",
+      // "background-image": '../assets/transparent_logo.png',
+      // content: "data(name)",
+      // color: "#CCCCDC",
+      // shape: "data(type)",
+      // height: 70,
+      // width: 70,
+      // "text-wrap": "wrap",
+      // "text-max-width": 200,
+      // "text-overflow-wrap": "anywhere",
+      // "font-size": 18,
+      // "text-valign": "bottom",
+    },
+  },
 ];
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.renderCyto = this.renderCyto.bind(this);
+    // this.renderCyto = this.renderCyto.bind(this);
   }
 
   renderCyto() {
-    //Configure our cytoscape graph
     let cy = cytoscape({
       container: document.getElementById("cy"), // container to render in
 
@@ -53,10 +70,10 @@ class Home extends Component {
 
         fit: true, // whether to fit the viewport to the graph
         directed: true, // whether the tree is directed downwards (or edges can point in any direction if false)
-        padding: 30, // padding on fit
+        padding: 10, // padding on fit
         circle: false, // put depths in concentric circles if true, put depths top down if false
         grid: false, // whether to create an even grid into which the DAG is placed (circle:false only)
-        spacingFactor: 1.75, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
+        spacingFactor: 5.75, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
         boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
         avoidOverlap: true, // prevents node overlap, may overflow boundingBox if not enough space
         nodeDimensionsIncludeLabels: false, // Excludes the label when calculating node bounding boxes for the layout algorithm
@@ -79,7 +96,6 @@ class Home extends Component {
 
     const props = this.props;
 
-    //Configure behavior for when we click an object
     cy.on("tap", "node", function (shape) {
       const onTap = props.onTap;
       const node = shape.target;
@@ -88,17 +104,15 @@ class Home extends Component {
     });
   }
 
-  //Load our cluster data and initialize our terminal once the DOM loads
   async componentDidMount(){
     buildTerminal();
-    //const toJson = function(res){ return res.json(); }; 
+    const toJson = function(res){ return res.json(); }; 
     window.bridge.send('compileData');
     let clusterData = await window.bridge.invoke('compileData').then(cluster => {
         return cluster;
       });
     this.setState({ clusterData: clusterData });
-    console.log(clusterData);
-    //re-render the cluster when window resizes
+    // console.log(clusterData);
     window.addEventListener("resize", this.renderCyto);
     this.renderCyto();
     return null;
@@ -108,7 +122,7 @@ class Home extends Component {
     return (
       <div>
         <main>
-          <div id="cy" style={{ height: "800px" }}></div>
+          <div id="cy" style={{ height: "600px" }}></div>
           <div id="terminal"></div>
         </main>
       </div>

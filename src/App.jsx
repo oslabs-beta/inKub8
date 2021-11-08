@@ -7,6 +7,10 @@ import Grafana from './components/Grafana.jsx';
 import Prom from './components/Prom.jsx';
 import DisplayMetrics from './components/DisplayMetrics.jsx';
 import PodMetrics from './components/PodMetrics.jsx';
+import DeplMetrics from './components/DeplMetrics.jsx';  
+import SSMetrics from './components/SSMetrics.jsx';  
+import ServiceMetrics from './components/ServiceMetrics.jsx';
+
 
 class App extends Component {
   constructor(props) {
@@ -30,25 +34,23 @@ class App extends Component {
   }
 
   renderMetricsNode() {
-    const {lastPodShape} = this.state;
+    const { lastPodShape } = this.state;
     
-    if (lastPodShape === "ellipse") {
-     
-      return <PodMetrics />;
-    } else if (lastPodShape === "triangle") {
-      
-    }
+    if (lastPodShape === "ellipse") return <PodMetrics />;
+    if (lastPodShape === "hexagon") return <DeplMetrics />
+    if (lastPodShape === "pentagon" || lastPodShape === "triangle") return <DisplayMetrics />
+    if (lastPodShape === "rectangle" || lastPodShape === "vee" || lastPodShape === "diamond") return <ServiceMetrics />
     return <DisplayMetrics />;
 
-    switch (lastPodShape) {
-      case "ellipse":
+    // switch (lastPodShape) {
+    //   case "ellipse":
     
-        return <PodMetrics />;
-      case "triangle":
- 
-      default:
-        return <DisplayMetrics />;
-    }
+    //     return <PodMetrics />;
+    //   case "triangle":
+    //     return <ServiceMetrics /> 
+    //   default:
+    //     return <DisplayMetrics />;
+    // }
   }
 
   render() {
@@ -62,11 +64,9 @@ class App extends Component {
               <Route exact path="/">
                 <div className="row">
                   <div className="column left">
-                    <h2 className="header">Cytoscape Data</h2>
                     <Home onTap={this.handleTap} />
                   </div>
                   <div className="column right">
-                    <h2 className="header">Metrics</h2>
                     {this.renderMetricsNode()}
                   </div>
                 </div>
