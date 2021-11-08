@@ -1,5 +1,4 @@
 const {getAllObjects} = require("./scrapeCluster.js");
-console.log(getAllObjects, "AAAAAAAAAAAAAAAAAAAAA");
 //Timestamp, Name, uid, #  of containers, status: phase, hostIP, podIP, owerReference Kind, ownerReference uid
 
 //Used to traverse our cluster and find certain objects
@@ -40,18 +39,17 @@ function traverse(searchType, data, uid, returnVal, location = "cluster"){
 
 function getData(data, objectTypes, requestedData){
 	//iterate over each instance of the given objectTypes asynchronously.
-	//We do it in a way where we process multiple objectTypes at the same time
+	//We do it this way for performance reasons. If we need to scrape multiple objectTypes, better to do it at the same time rather than wait for one to finish first.
 
 	//Return a Promise that resolves with returnedData, once all objects we requested to process were added to returnedData
 	return new Promise((topResolve) => {
 		const returnedData = {};
-		//outerPromises will become an array of promises, one for each object type.
+        //We turn our array of objectTypes and the array's of those object's into array's of promises.
+        //Once all these promises resolve, our function resolves with the data.
 		const outerPromises = objectTypes.map(objectType => {
-			//innerPromises becomes an array of promises, each of which resolves after all the objects have been added to returnedData
 			const innerPromises = data[objectType].map(currentObj => {
 				return new Promise((resolve) => {
 					const nodeObjects = getObjData(data, currentObj, requestedData, objectType);
-					//Add our data into returnedData array in a format accepted by cytograph
 
 					for(let i = 0; i < nodeObjects.length; i++){
 						try{
@@ -62,10 +60,8 @@ function getData(data, objectTypes, requestedData){
 					resolve();
 				});
 			});
-			//Return a single promise that resolves once all the promises inside of innerPromises are resolved
 			return Promise.all(innerPromises);
 		});
-		//Once all of our promises resolve and everything was added to returnedData, resolve the promise our getData function returned
 		Promise.all(outerPromises).then(values => {
 			topResolve(returnedData);
 		});
@@ -74,10 +70,12 @@ function getData(data, objectTypes, requestedData){
 
 function getObjData(data, obj, requestedData, type) {
 	let nodeObjects = [];
-	//retrieve data at requested endpoints, add returned data into objectData in format {requestedData value (ex: metadata.name): data}
 	const objectData = {};
+    //Retrieve the requestedData field's to be added into moreInfo on line 87.
 	if (Array.isArray(requestedData)) {
+        //For each requestedData type
 		requestedData.forEach((el) => {
+            //Navigate through our object into the requested field and add it to objectData
 			let currentLevel = obj;
 			el.split(".").forEach((selector) => {
 				currentLevel = currentLevel[selector];
@@ -86,11 +84,13 @@ function getObjData(data, obj, requestedData, type) {
 		});
 	}
 
+    //Here we're pushing the object in cytoscapes requested format.
 	nodeObjects.push({
 		"data": {id: obj.metadata.uid, "name": obj.metadata.name, "creationTimestamp": obj.metadata.creationTimestamp, "moreInfo": objectData, "type": setType(type)},
 		"group": "nodes",
 	});
 
+    //Loop through each of the objects owner's and recursively call this function on them.
 	if(Array.isArray(obj.metadata.ownerReferences)){
 		if(!obj.metadata.ownerReferences){
 			console.log(obj);
@@ -107,13 +107,14 @@ function getObjData(data, obj, requestedData, type) {
 		});
 	}
 
+    //We need to handle services a bit differently, because they point to other object's by using endpointslices
 	if(type == "services"){
 		//UNTESTED
 
-		//Find the endpointSlice connected to the service. The endpointSlice tells us which object this service targets
+		//Find the endpointSlice(s) connected to the service. The endpointSlice tells us which object this service targets
 		const children = traverse("childObjects", data.endpointslices, obj.metadata.uid, null, "cluster.endpointslices");
-		//console.log(output);
-		//If the endpointSlice has endpoints
+
+        //Add the cytoscape connection from our service to the targeted object, and then add the targeted object to our nodeObject's in case it doesn't already exist.
 		children.forEach(child => {
 			if(child.endpoints){
 				child.endpoints.forEach(endpoint => {
@@ -136,6 +137,7 @@ function getObjData(data, obj, requestedData, type) {
 	return nodeObjects;
 }
 
+//Function for setting the appropriate shape / icon respective to the object's type.
 function setType(objectType){
 	switch(objectType){
 	case "pods":
@@ -167,13 +169,10 @@ function setType(objectType){
 	}
 }
 
-//input: a string with words separated by dashes; the maximum number of characters desired on a line
-//output: the input string with \n characters added after some dashes so each line of text does not exeed maxLength, if possible
-
+//Copile all the data using the functions we defined above.
 async function compileData(options){
 	const cluster = await getAllObjects();
 	const dataObj = await getData(cluster, ["pods", "services"], ["status.hostIP"]);
-	console.log(dataObj);
 	const dataArr = [];
 	for (const key in dataObj) {
 		dataArr.push(dataObj[key]);

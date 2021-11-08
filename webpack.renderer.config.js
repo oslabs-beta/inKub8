@@ -1,5 +1,8 @@
 const rules = require("./webpack.rules");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+const assets = ["img", "css"];
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+//const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 rules.push({
 	test: /\.css$/,
@@ -11,9 +14,20 @@ module.exports = {
 	module: {
 		rules,
 	},
-
+	plugins: assets.map(asset => {
+		return new CopyWebpackPlugin(
+			{
+				patterns: [
+					{
+						from: path.resolve(__dirname, "src", "assets", asset),
+						to: path.resolve(__dirname, ".webpack/renderer", asset)
+					}
+				]
+			});
+	}),
 	externals: {
 		"fs": require("fs"),
+		"__dirname": __dirname
 	},
 	/*
   resolve: {

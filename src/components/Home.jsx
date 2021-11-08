@@ -36,7 +36,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-  
+    this.renderCyto = this.renderCyto.bind(this);
   }
 
   renderCyto() {
@@ -77,11 +77,9 @@ class Home extends Component {
       userPanningEnabled: false,
     });
 
-    const props = this.props;
-
     //Configure behavior for when we click an object
     cy.on("tap", "node", function (shape) {
-      const onTap = props.onTap;
+      const onTap = this.props.onTap;
       const node = shape.target;
       onTap?.(node._private.data);
       console.log("POD TAPPED!!", node._private.data);
@@ -90,7 +88,7 @@ class Home extends Component {
 
   //Load our cluster data and initialize our terminal once the DOM loads
   async componentDidMount(){
-    buildTerminal();
+    //buildTerminal();
     //const toJson = function(res){ return res.json(); }; 
     window.bridge.send('compileData');
     let clusterData = await window.bridge.invoke('compileData').then(cluster => {

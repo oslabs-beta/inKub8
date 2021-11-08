@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+//import logo from '../assets/transparent_logo.png';
 
 class Navbar extends Component {
   constructor(props) {
@@ -79,13 +80,20 @@ class Navbar extends Component {
               </a> */}
             </Menu>
 
-            <Typography
+              <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  width: '100%'
+              }}>
+                <img src='/img/transparent_logo2.png' height="25"/>
+              </div>
+            {/* <Typography
               variant="h6"
               component="div"
               sx={{ flexGrow: 1, textAlign: "center" }}
             >
               InKub8
-            </Typography>
+            </Typography> */}
             
           </Toolbar>
         </AppBar>
