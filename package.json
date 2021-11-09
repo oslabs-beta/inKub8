@@ -118,6 +118,7 @@
     "styled-components": "^5.3.3",
     "tippy.js": "^6.3.4",
     "webpack-node-externals": "^3.0.0",
-    "xterm": "^4.14.1"
+    "xterm": "^4.14.1",
+    "yarn": "^1.22.17"
   }
 }

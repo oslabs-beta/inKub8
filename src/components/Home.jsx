@@ -158,16 +158,14 @@ class Home extends Component {
     return (
       <div>
         <main>
-          <div id="cy" style={{ height: "600px" }}></div>
-          <div id="terminal"></div>
+          <div id="cy" style={{ height: "500px" }}></div>
+          <div id="terminal-wrapper">
+            <div id="terminal"></div>
+          </div>
         </main>
       </div>
     );
   }
 }
 
-
-
-
 export default Home;
-
