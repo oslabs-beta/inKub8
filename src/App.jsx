@@ -53,7 +53,6 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <HashRouter>
         <div>

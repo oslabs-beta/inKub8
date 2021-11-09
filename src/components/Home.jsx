@@ -101,6 +101,7 @@ class Home extends Component {
   
 
     cy.on("tap", "node", function (shape) {
+      console.log(this.props)
       const onTap = this.props.onTap;
       const node = shape.target;
       onTap?.(node._private.data);
