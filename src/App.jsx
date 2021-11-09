@@ -8,7 +8,6 @@ import Prom from './components/Prom.jsx';
 import DisplayMetrics from './components/DisplayMetrics.jsx';
 import PodMetrics from './components/PodMetrics.jsx';
 import DeplMetrics from './components/DeplMetrics.jsx';  
-import SSMetrics from './components/SSMetrics.jsx';  
 import ServiceMetrics from './components/ServiceMetrics.jsx';
 
 

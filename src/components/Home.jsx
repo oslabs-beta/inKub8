@@ -1,9 +1,13 @@
 import React, { Component, setState } from 'react';
-import fs from 'fs';
 import buildTerminal from "../index.js"
+import cytoscape from 'cytoscape';
+import tippy from 'tippy.js';
+import popper from 'cytoscape-popper';
 import '../../node_modules/xterm/css/xterm.css';
 //import { ipcRenderer } from 'electron';
-const cytoscape = require("cytoscape");
+
+cytoscape.use( popper );
+
 const cyStyle = [
   {
     selector: "node",
@@ -94,6 +98,9 @@ class Home extends Component {
       userPanningEnabled: false,
     });
 
+    
+
+    
     const props = this.props;
 
     cy.on("tap", "node", function (shape) {
@@ -102,9 +109,41 @@ class Home extends Component {
       onTap?.(node._private.data);
       console.log("POD TAPPED!!", node._private.data);
     });
-  }
+  
+
+//   function makePopper(ele) {
+//     let ref = ele.popperRef(); // used only for positioning
+
+//     ele.tippy = tippy(ref, { // tippy options:
+//       content: () => {
+//         let content = document.createElement('div');
+
+//         content.innerHTML = ele.id();
+
+//         return content;
+//       },
+//       trigger: 'manual' // probably want manual mode
+//     });
+//   }
+
+//   cy.ready(function() {
+//     cy.elements().forEach(function(ele) {
+//       makePopper(ele);
+//     });
+//   });
+
+//   cy.elements().unbind('mouseover');
+//   cy.elements().bind('mouseover', (event) => event.target.tippy.show());
+
+//   cy.elements().unbind('mouseout');
+//   cy.elements().bind('mouseout', (event) => event.target.tippy.hide());
+
+}
 
   async componentDidMount(){
+
+    // cytoscape.use( popper );
+
     buildTerminal();
     const toJson = function(res){ return res.json(); }; 
     window.bridge.send('compileData');
