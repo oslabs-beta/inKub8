@@ -47,7 +47,6 @@ const createWindow = () => {
 	mainWindow.show();
 	mainWindow.webContents.openDevTools();
  
-	//Handle terminal I/O
 	const ptyProcess = pty.spawn(shell, [], {
 		name: "xterm-color", 
 		cols: 80, 
@@ -55,11 +54,14 @@ const createWindow = () => {
 		cwd: process.env.HOME, 
 		env: process.env},
 	);
+  
 	ptyProcess.on("data", function(data){
 		mainWindow.webContents.send("terminal.incData", data);
-	}); 
+	});  
+
 	ipcMain.on("terminal.toTerm", function(event, data) {
 		ptyProcess.write(data);
+		// mainWindow.webContents.send('terminal.incData', data);
 	});
   
 };
