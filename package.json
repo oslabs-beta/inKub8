@@ -3,7 +3,7 @@
   "productName": "kubevisualizer",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": ".webpack/main",
+  "main": "./.webpack/main",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -54,7 +54,13 @@
                 {
                   "html": "./src/index.html",
                   "js": "./src/renderer.jsx",
-                  "name": "main_window"
+                  "name": "main_window",
+                  "preload": {
+                    "js": "./src/preload.js"
+                  },
+                  "test": {
+                    "js": "./src/assets/transparent_logo.png"
+                  }
                 }
               ]
             },
@@ -77,6 +83,7 @@
     "@electron-forge/plugin-webpack": "6.0.0-beta.61",
     "@vercel/webpack-asset-relocator-loader": "1.7.0",
     "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.0.0",
     "electron": "^15.2.0",
     "electron-is-dev": "^2.0.0",

@@ -13,6 +13,16 @@ module.exports = [
 			loader: "babel-loader",
 		},
 	},
+	/*{
+		test: /\.(png|jpg)$/,
+		exclude: /node_modules/,
+		use: {
+			loader: "file-loader"
+		},
+		options: {
+			name: "/public/icons/[name].[ext]"
+		}
+	}*/
 	//Put your webpack loader rules in this array.  This is where you would put
 	//your ts-loader configuration for instance:
 	/**

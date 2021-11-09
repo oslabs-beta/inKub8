@@ -24,7 +24,6 @@ const createWindow = () => {
 		});
 	});
 
-
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 800,
@@ -33,7 +32,8 @@ const createWindow = () => {
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: true,
-			preload: path.resolve(__dirname, "..", "..", "src", "preload.js")
+			preload: path.resolve(MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY)
+			//preload: path.resolve(__dirname, "..", "..", "src", "preload.js")
 		},
 		show: false
 	});

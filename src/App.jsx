@@ -15,7 +15,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleTap = this.handleTap.bind(this);
+    // this.handleTap = this.handleTap.bind(this);
   }
 
   handleTap(data) {

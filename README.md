@@ -1,4 +1,4 @@
-# kubevisualizer
+# inKub8
 Creating a Kubernetes Visualizer
 
 git 
