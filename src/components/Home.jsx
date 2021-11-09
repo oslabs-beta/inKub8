@@ -58,7 +58,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    // this.renderCyto = this.renderCyto.bind(this);
+    this.renderCyto = this.renderCyto.bind(this);
   }
 
   renderCyto() {
@@ -98,10 +98,7 @@ class Home extends Component {
       userPanningEnabled: false,
     });
 
-    
-
-    
-    const props = this.props;
+  
 
     cy.on("tap", "node", function (shape) {
       const onTap = this.props.onTap;
