@@ -23,12 +23,12 @@ class ServiceMetrics extends Component {
             height="200"
             frameBorder="0"
           ></iframe>
-          <iframe
+          {/* <iframe
             src="http://localhost:3000/d-solo/GzFw-UK7k/prometheus-overview?orgId=1&refresh=60s&from=1636391011792&to=1636394611792&panelId=5"
             width="350"
             height="200"
             frameBorder="0"
-          ></iframe>
+          ></iframe> */}
         </main>
       </div>
     );
