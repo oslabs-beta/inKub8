@@ -36,7 +36,7 @@ head {
   /* border: 5px solid white; */
   background-color: #131619;
   padding: 4px 0px;
-  max-width: 99%;
+  max-width: 100%;
   min-width: 750px;
   margin: 0 auto;
   border-radius: 6px;
@@ -68,15 +68,16 @@ head {
 } */
 .column {
   float: left;
-  padding: 10px;
+  /* padding: 2px; */
 }
 
 .left {
+  padding-right: 0.5%;
   width: 70%;
 }
 
 .right {
-  width: 25%;
+  width: 29.5%;
 }
 
 /* .header {
@@ -86,7 +87,7 @@ head {
 
 #cy {
   background-color: #131619;
-  box-shadow: 0px 0px 10px black;
+  /* box-shadow: 0px 0px 10px black; */
   margin-bottom: 4px;
   /* border-color: #CCCCDC; */
 }

@@ -129,6 +129,8 @@ class Home extends Component {
           return position;
         },
       },
+      minZoom: 0.1,
+      maxZoom: 2,
       userZoomingEnabled: true,
       userPanningEnabled: true,
       wheelSensitivity: 0.2,
@@ -157,7 +159,7 @@ class Home extends Component {
           // console.log("yoooooooo:", instance.popper)
           instance.popper.reference = ref
           // console.log("y1111111111ooo:", instance.popper.reference)
-          console.log('ELE TIPPY', ele.tippy)
+          // console.log('ELE TIPPY', ele.tippy)
         },
       });
 
@@ -174,7 +176,7 @@ class Home extends Component {
       }
 
       if (group() === "nodes") {
-      ele.tippy.setContent('Name: ' + name());
+      ele.tippy.setContent(name());
       console.log("ELEEMTENT:", ele)
     }}
   
