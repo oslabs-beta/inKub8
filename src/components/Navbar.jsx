@@ -61,7 +61,7 @@ class Navbar extends Component {
                 to="/grafana"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <MenuItem>Grafana</MenuItem>
+                <MenuItem>Metrics</MenuItem>
               </Link>
 
               <Link
