@@ -34,7 +34,7 @@ class DisplayMetrics extends Component {
 
           {/* <iframe
             src="http://localhost:3000/d-solo/efa86fd1d0c121a26444b636a3f509a8/kubernetes-compute-resources-cluster?orgId=1&refresh=10s&from=1636069175351&to=1636072775351&panelId=18"
-            width="350"
+            width="100%"
             height="200"
             frameBorder="0"
           ></iframe> */}
