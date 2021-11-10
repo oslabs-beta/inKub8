@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route, HashRouter } from 'react-router-dom';
 
+import Tippy from '@tippyjs/react';
+
 import Navbar from './components/Navbar.jsx';
 import Home from './components/Home.jsx';
 import Grafana from './components/Grafana.jsx';
@@ -19,7 +21,6 @@ class App extends Component {
   }
 
   handleTap(data) {
-    console.log(data)
     const { type, id } = data;
     const newState = { ...this.state };
     if (id === this.state.lastPodId) {
@@ -30,30 +31,37 @@ class App extends Component {
       newState.lastPodId = id;
     }
     this.setState(newState);
+    return <Tippy content="Hello"/>
+
   }
 
   renderMetricsNode() {
     const { lastPodShape } = this.state;
-    
+
     if (lastPodShape === "ellipse") return <PodMetrics />;
-    if (lastPodShape === "hexagon") return <DeplMetrics />
-    if (lastPodShape === "pentagon" || lastPodShape === "triangle") return <DisplayMetrics />
-    if (lastPodShape === "rectangle" || lastPodShape === "vee" || lastPodShape === "diamond") return <ServiceMetrics />
+    if (lastPodShape === "hexagon") return <DeplMetrics />;
+    if (lastPodShape === "pentagon" || lastPodShape === "triangle")
+      return <DisplayMetrics />;
+    if (
+      lastPodShape === "rectangle" ||
+      lastPodShape === "vee" ||
+      lastPodShape === "diamond"
+    )
+      return <ServiceMetrics />;
     return <DisplayMetrics />;
 
     // switch (lastPodShape) {
     //   case "ellipse":
-    
+
     //     return <PodMetrics />;
     //   case "triangle":
-    //     return <ServiceMetrics /> 
+    //     return <ServiceMetrics />
     //   default:
     //     return <DisplayMetrics />;
     // }
   }
 
   render() {
-
     return (
       <HashRouter>
         <div>
@@ -61,12 +69,17 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route exact path="/">
-                <div className="row">
-                  <div className="column left">
-                    <Home onTap={this.handleTap} />
+                <div className="container">
+                  <div className="row">
+                    <div className="column left">
+                      <Home onTap={this.handleTap} />
+                    </div>
+                    <div className="column right">{this.renderMetricsNode()}</div>
                   </div>
-                  <div className="column right">
-                    {this.renderMetricsNode()}
+                  <div className="row">
+                    <div id="terminal-wrapper">
+                      <div id="terminal"></div>
+                    </div>
                   </div>
                 </div>
               </Route>
