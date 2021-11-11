@@ -46,43 +46,43 @@ const cyStyle = [
   {
     selector: 'node[type = "ellipse"]',
     style: {
-      "background-image": "../img/pod-128.png",
+      "background-image": "main_window/img/pod-128.png img/pod-128.png",
     },
   },
   {
     selector: 'node[type = "hexagon"]',
     style: {
-      "background-image": "../img/deploy-128.png",
+      "background-image": "main_window/img/deploy-128.png img/deploy-128.png",
     },
   },
   {
     selector: 'node[type = "pentagon"]',
     style: {
-      "background-image": "../img/sts-128.png",
+      "background-image": "img/sts-128.png main_window/img/sts-128.png",
     },
   },
   {
     selector: 'node[type = "triangle"]',
     style: {
-      "background-image": "../img/rs-128.png",
+      "background-image": "img/rs-128.png main_window/img/rs-128.png",
     },
   },
   {
     selector: 'node[type = "rectangle"]',
     style: {
-      "background-image": "../img/svc-128.png",
+      "background-image": "img/svc-128.png main_window/img/svc-128.png",
     },
   },
   {
     selector: 'node[type = "vee"]',
     style: {
-      "background-image": "../img/svc-128.png",
+      "background-image": "img/svc-128.png main_window/img/svc-128.png",
     },
   },
   {
     selector: 'node[type = "diamond"]',
     style: {
-      "background-image": "../img/svc-128.png",
+      "background-image": "img/svc-128.png main_window/img/svc-128.png",
     },
   },
 ];
