@@ -34,22 +34,22 @@ Installing inKub8 provides you access to three pages that each provide their own
 # Cluster Overview
 The landing page provides you with a visual representation of your Kubernetes cluster with the different nodes and their relationships illustrated using the Cytoscape.js library. When a node is clicked, it’s corresponding metrics are loaded on the right side for fast, efficient monitoring. The cluster’s nodes can be customized to the user’s preferences maximizing the user’s ability to respond to threats to the cluster.
 
-![](https://cdn-images-1.medium.com/max/2000/1*aQJSh-RCHfo8DWH-TBfkfQ.png)
+<img src="https://raw.githubusercontent.com/oslabs-beta/inKub8/main/src/assets/img/landingPage.gif">
 
 # Integrated Command Line
 The home page also comes with an integrated command line that allows the user to make kubectl commands directly in the application.
 
-![](https://cdn-images-1.medium.com/max/2000/1*aQJSh-RCHfo8DWH-TBfkfQ.png)
+<img src="https://raw.githubusercontent.com/oslabs-beta/inKub8/main/src/assets/img/terminal%20zoomed.gif">
 
 # Metrics Dashboards
 Our metrics page employs complete Grafana integration allowing the user to manage and organize their dashboards. These dashboards contain all the vital data a user will need to monitor their Kubernetes cluster including memory and CPU usage by pod, received/transmitted bandwidth, and average scrape interval duration.
 
-![](https://cdn-images-1.medium.com/max/2000/1*aQJSh-RCHfo8DWH-TBfkfQ.png)
+<img src="https://raw.githubusercontent.com/oslabs-beta/inKub8/main/src/assets/img/metricsPage.gif">
 
 # Prometheus Dashboard
 The prometheus page exposes the full prometheus dashboard allowing you to view different alerts, execute PromQL queries, and more.
 
-![](https://cdn-images-1.medium.com/max/2000/1*aQJSh-RCHfo8DWH-TBfkfQ.png)
+<img src="https://raw.githubusercontent.com/oslabs-beta/inKub8/main/src/assets/img/prometheusPage.gif">
 
 # Requirements
 
