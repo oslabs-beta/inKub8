@@ -21,6 +21,9 @@ module.exports = {
     }
   }*/
 	target: "electron-main",
+	externals: {
+		"pty": require.resolve("node-pty")
+	}
 	//externals: [nodeExternals()]
 	// plugins: [
 	//   new HtmlWebpackPlugin({
