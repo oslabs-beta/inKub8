@@ -3,7 +3,7 @@ const path = require("path");
 const {compileData} = require("./clusterMapping/retrieveData.js");
 //const isDev = require("electron-is-dev");
 const os = require("os");
-//const pty = require("node-pty");
+const pty = require("node-pty");
 
 // if someone is on windows utilize powershell and if not do bash
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash";
