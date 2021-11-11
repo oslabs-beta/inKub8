@@ -7,6 +7,7 @@ module.exports = {
    * This is the main entry point for your application, it's the first file
    * that runs in the main process.
    */
+	mode: "production",
 	entry: ["./src/main.js"],
 	//target: 'electron-renderer',
 	// Put your normal webpack config below here
@@ -19,8 +20,8 @@ module.exports = {
       //'path': require('path')
     }
   }*/
-	target: "node",
-	externals: [nodeExternals()]
+	target: "electron-main",
+	//externals: [nodeExternals()]
 	// plugins: [
 	//   new HtmlWebpackPlugin({
 	//     'meta': {

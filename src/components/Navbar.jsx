@@ -85,7 +85,9 @@ class Navbar extends Component {
                   justifyContent: 'center',
                   width: '100%'
               }}>
-                <img src='/img/transparent_logo2.png' height="25"/>
+                <object data="./main_window/img/transparent_logo2.png" type="image/png" height="25">
+                    <img src='./img/transparent_logo2.png' height="25"/>
+                </object>
               </div>
             {/* <Typography
               variant="h6"

@@ -3,7 +3,7 @@ const path = require("path");
 const {compileData} = require("./clusterMapping/retrieveData.js");
 //const isDev = require("electron-is-dev");
 const os = require("os");
-const pty = require("node-pty");
+//const pty = require("node-pty");
 
 // if someone is on windows utilize powershell and if not do bash
 const shell = os.platform() === "win32" ? "powershell.exe" : "bash";
@@ -19,7 +19,7 @@ const createWindow = () => {
 		callback({
 			responseHeaders: {
 				...details.responseHeaders,
-				"Content-Security-Policy": ["default-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-src *; img-src data: http: https:;"]
+				"Content-Security-Policy": ["default-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src https: 'self' 'unsafe-inline'; frame-src *; img-src file: data: http: https:;"]
 			}
 		});
 	});
@@ -45,7 +45,7 @@ const createWindow = () => {
 	// Open the DevTools.
 	mainWindow.maximize();
 	mainWindow.show();
-	mainWindow.webContents.openDevTools();
+	//mainWindow.webContents.openDevTools();
  
 	const ptyProcess = pty.spawn(shell, [], {
 		name: "xterm-color", 
