@@ -1,5 +1,4 @@
-# inKub8
-Creating a Kubernetes Visualizer
+<!-- Creating a Kubernetes Visualizer
 
 git 
 NOTE:
@@ -11,7 +10,6 @@ prom-operator
 
 helm install prometheus prometheus-community/kube-prometheus-stack
 
-
 How To Deploy and Use inKub8
 donwload the release from the Github release page and install the app. 
 the app will connect to your Kubernetes cluster through the Kubernetes API so it needs to be run on the same computer. 
@@ -19,12 +17,12 @@ the app will connect to your Kubernetes cluster through the Kubernetes API so it
 install dependencies after 
 
 make sure you already have prometheus and grafana installed already, but if not install it using helm. 
--list out the steps for installing prometheus and grafana and how to deploy it in your cluster.
+-list out the steps for installing prometheus and grafana and how to deploy it in your cluster. -->
 
 
-# inKub8
+<img src="https://raw.githubusercontent.com/oslabs-beta/inKub8/main/src/assets/img/High_Resolution_Image_1.jpg">
 
-# **What is inKub8?**
+# What is inKub8?
 
 inKub8 is an open source tool for visualizing and monitoring your Kubernetes cluster. It integrates with prometheus and grafana allowing you to scrape detailed metrics from your cluster and transform those metrics into beautiful and easy to understand charts and graphs.
 
