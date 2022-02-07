@@ -2,7 +2,6 @@ const k8s = require("@kubernetes/client-node");
 const kc = new k8s.KubeConfig();
 const fs = require("fs");
 kc.loadFromDefault();
-
 const coreAPI = kc.makeApiClient(k8s.CoreV1Api);
 const apisAPI = kc.makeApiClient(k8s.ApisApi);
 const customObjectsAPI = kc.makeApiClient(k8s.CustomObjectsApi);
