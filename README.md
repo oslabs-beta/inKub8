@@ -66,7 +66,7 @@ If you installed using helm you can use the commands `kubectl port-forward deplo
 ## Gunnar Marino
 
 - LinkedIn: https://www.linkedin.com/in/gunnarmarino/
-- Github: https://github.com/kingfly555
+- Github: https://github.com/gunnarmarino
 
 # Links
 
