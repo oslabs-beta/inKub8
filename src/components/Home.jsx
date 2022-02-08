@@ -232,7 +232,6 @@ class Home extends Component {
 
     buildTerminal();
     const toJson = function(res){ return res.json(); }; 
-    window.bridge.send('compileData');
     let clusterData = await window.bridge.invoke('compileData').then(cluster => {
         return cluster;
       });
